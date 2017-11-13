@@ -28,4 +28,10 @@ def cylinder(x,y,z,axis,block):
  mc.player.setPos(px,py+y,pz)
 
 def sphere(X,Y,Z,block):
- print("Not yet implemented.")
+ for i in range(1-Z,Z):
+  x,y,z=cwm(i,X,Y)+1,cwm(i,X,Y)+1,i+1
+  mc=Minecraft.create("127.0.0.1",4711)
+  px,py,pz=mc.player.getPos()
+  for i in range(-x+1,x):
+   mc.setBlocks(px+i,py-cwm(i,x,y),pz-z+1,px+i,py+cwm(i,x,y),pz+z-1,block)
+ mc.player.setPos(px,py+Y,pz)
