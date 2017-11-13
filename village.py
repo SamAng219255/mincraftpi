@@ -1,4 +1,5 @@
-from mcpi import Minecraft,block,event,vec3
+from mcpi import block,event,vec3
+from mcpi.minecraft import Minecraft
 import sys
 import random
 
@@ -32,7 +33,7 @@ def chooseStruct(x,y,Map,count,direc,facing):
  else:
   return -1*int(random.random()<structProb[(direc-facing)%4])
 
-def buildingabuilding(pos,building,Map,facing):
+def buildingabuilding(pos,building,Map,facing,apothem):
  mc=Minecraft.create()
  plpos=mc.player.getPos()
  x,z=addToTuple(pos,-apothem)
@@ -43,7 +44,7 @@ def buildingabuilding(pos,building,Map,facing):
  mc.setBlocks(x-2,y,z-2,x+2,y+4,z+2,0)
  mc.setBlocks(x-2,y-1,z-2,x+2,y-1,z+2,2)
  if building>0:
-  f=open("buildings/"+building+".mcbuild","r")
+  f=open("buildings/"+str(building)+".mcbuild","r")
   for piece in f:
    data=piece.split(";")
    data=data[0].split(",")
@@ -70,7 +71,7 @@ def build(structCount,apothem):
  for act in activityList:
   herex,herey=act[0]
   for xmod,ymod,i in buildDirecs:
-   if buildMap[herex+xmod][herey+ymod]==-1
+   if buildMap[herex+xmod][herey+ymod]==-1:
     building=chooseStruct(herex+xmod,herey+ymod,buildMap,structCount,act[1],i)
     buildMap[herex+xmod][herey+ymod]=[building]
     buildList.append([(herex+xmod,herey+ymod),building,i])
@@ -83,6 +84,6 @@ def build(structCount,apothem):
      activityList.append([(herex+xmod,herey+ymod),i])
   activityList.remove(act)
  for data in buildList:
-  buildingabuilding(data[0],data[1],buildMap,data[2])
+  buildingabuilding(data[0],data[1],buildMap,data[2],apothem)
 if __name__=='__main__':
- build(sys.argv[1],sys.argv[2])
+ build(int(sys.argv[1]),int(sys.argv[2]))
