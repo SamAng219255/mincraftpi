@@ -33,16 +33,13 @@ def sphereold(X,Y,Z,block):
   print("i:",i)
   x,y,z=int(cwm(i,X,Y)+1),int(cwm(i,X,Y)+1),i+1
   print("x:",x,"y:",y,"z:",z)
-  mc=Minecraft.create("127.0.0.1",4711)
   px,py,pz=mc.player.getPos()
   px,py,pz=int(px)+0.5,int(py)+0.5,int(pz)+0.5
   for j in range(-x+1,x):
    mc.setBlocks(px+j,py-cwm(j,x,y),pz-z+1,px+j,py+cwm(j,x,y),pz+z-1,block)
  mc.player.setPos(px,py+Y,pz)
 
-def sphere(X,Y,Z,block):
- mc=Minecraft.create()
- px,py,pz=mc.player.getPos()
+def sphere(mc,px,py,pz,X,Y,Z,block):
  mc.player.setPos(px,py+Y,pz)
  for x in range(-X,X):
   for y in range(-Y,Y):
@@ -51,9 +48,7 @@ def sphere(X,Y,Z,block):
      mc.setBlock(px+x,py+y,pz+z,block)
  mc.player.setPos(px,py+Y,pz)
 
-def cylinder(X,Y,Z,axis,block):
- mc=Minecraft.create()
- px,py,pz=mc.player.getPos()
+def cylinder(mc,px,py,pz,X,Y,Z,axis,block):
  mc.player.setPos(px,py+Y,pz)
  if axis%3==0:
   for x in range(-X,X):
