@@ -40,16 +40,13 @@ def sphereold(X,Y,Z,block):
  mc.player.setPos(px,py+Y,pz)
 
 def sphere(mc,px,py,pz,X,Y,Z,block):
- mc.player.setPos(px,py+Y,pz)
  for x in range(-X,X):
   for y in range(-Y,Y):
    for z in range(-Z,Z):
     if ((x/X)**2)+((y/Y)**2)+((z/Z)**2)<1:
      mc.setBlock(px+x,py+y,pz+z,block)
- mc.player.setPos(px,py+Y,pz)
 
 def cylinder(mc,px,py,pz,X,Y,Z,axis,block):
- mc.player.setPos(px,py+Y,pz)
  if axis%3==0:
   for x in range(-X,X):
    for y in range(-Y,Y):
@@ -65,4 +62,3 @@ def cylinder(mc,px,py,pz,X,Y,Z,axis,block):
    for z in range(-Z,Z):
     if ((y/Y)**2)+((z/Z)**2)<1:
      mc.setBlocks(px-X,py+y,pz+z,px+X,py+y,pz+z,block)
- mc.player.setPos(px,py+Y,pz)
