@@ -40,25 +40,46 @@ def sphereold(X,Y,Z,block):
  mc.player.setPos(px,py+Y,pz)
 
 def sphere(mc,px,py,pz,X,Y,Z,block):
- for x in range(-X,X):
-  for y in range(-Y,Y):
-   for z in range(-Z,Z):
+ for x in range(-int(X),int(X)):
+  for y in range(-int(Y),int(Y)):
+   for z in range(-int(Z),int(Z)):
     if ((x/X)**2)+((y/Y)**2)+((z/Z)**2)<1:
      mc.setBlock(px+x,py+y,pz+z,block)
 
 def cylinder(mc,px,py,pz,X,Y,Z,axis,block):
  if axis%3==0:
-  for x in range(-X,X):
-   for y in range(-Y,Y):
+  for x in range(-int(X),int(X)):
+   for y in range(-int(Y),int(Y)):
     if ((x/X)**2)+((y/Y)**2)<1:
      mc.setBlocks(px+x,py+y,pz-Z,px+x,py+y,pz+Z,block)
  elif axis%3==1:
-  for x in range(-X,X):
-   for z in range(-Z,Z):
+  for x in range(-int(X),int(X)):
+   for z in range(-int(Z),int(Z)):
     if ((x/X)**2)+((z/Z)**2)<1:
      mc.setBlocks(px+x,py-Y,pz+z,px+x,py+Y,pz+z,block)
  elif axis%3==2:
-  for y in range(-Y,Y):
-   for z in range(-Z,Z):
+  for y in range(-int(Y),int(Y)):
+   for z in range(-int(Z),int(Z)):
     if ((y/Y)**2)+((z/Z)**2)<1:
      mc.setBlocks(px-X,py+y,pz+z,px+X,py+y,pz+z,block)
+
+def cone(mc,px,py,pz,X,Y,Z,axis,block):
+ if axis%3==0:
+  for x in range(-int(X),int(X)):
+   for y in range(-int(Y),int(Y)):
+    for z in range(int(Z)):
+     if ((x/(X*(1-z/Z)))**2)+((y/(Y*(1-z/Z)))**2)<1:
+      mc.setBlocks(px+x,py+y,pz+z,px+x,py+y,pz+z,block)
+ elif axis%3==1:
+  for x in range(-int(X),int(X)):
+   for z in range(-int(Z),int(Z)):
+    for y in range(int(Y)):
+     if ((x/(X*(1-y/Y)))**2)+((z/(Z*(1-y/Y)))**2)<1:
+      mc.setBlocks(px+x,py+y,pz+z,px+x,py+y,pz+z,block)
+      print(Y-y/Y)
+ elif axis%3==2:
+  for y in range(-int(Y),int(Y)):
+   for z in range(-int(Z),int(Z)):
+    for x in range(int(X)):
+     if ((y/(Y*(1-x/X)))**2)+((z/(Z*(1-x/X)))**2)<1:
+      mc.setBlocks(px+x,py+y,pz+z,px+x,py+y,pz+z,block)
