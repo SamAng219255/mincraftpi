@@ -39,12 +39,24 @@ def sphereold(X,Y,Z,block):
    mc.setBlocks(px+j,py-cwm(j,x,y),pz-z+1,px+j,py+cwm(j,x,y),pz+z-1,block)
  mc.player.setPos(px,py+Y,pz)
 
-def sphere(mc,px,py,pz,X,Y,Z,block):
- for x in range(-int(X),int(X)):
-  for y in range(-int(Y),int(Y)):
-   for z in range(-int(Z),int(Z)):
-    if ((x/X)**2)+((y/Y)**2)+((z/Z)**2)<1:
-     mc.setBlock(px+x,py+y,pz+z,block)
+def sphere(mc,px,py,pz,X,Y,Z,block,*extradata):
+ edata=list(extradata)
+ exdata=[0,0,0,0,1,0]
+ for i in range(len(edata)):
+  exdata[i]=edata[i]
+ bdata=exdata[0]
+ hX=exdata[1]
+ hY=exdata[2]
+ hZ=exdata[3]
+ tdist=exdata[4]
+ taxis=exdata[5]
+ limits=[-int(X),-int(Y),-int(Z),int(X),int(Y),int(Z)]
+ limits[taxis]=int(limits[taxis]*2*tdist-limits[taxis])
+ for x in range(limits[0],limits[3]):
+  for y in range(limits[1],limits[4]):
+   for z in range(limits[2],limits[5]):
+    if ((x/X)**2)+((y/Y)**2)+((z/Z)**2)<1 and (((x/hX)**2)+((y/hY)**2)+((z/hZ)**2)>1 or abs(x)==hX or abs(y)==hY or abs(z)==hZ):
+     mc.setBlock(px+x,py+y,pz+z,block,bdata)
 
 def cylinder(mc,px,py,pz,X,Y,Z,axis,block):
  if axis%3==0:
