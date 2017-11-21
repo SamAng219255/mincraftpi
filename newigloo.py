@@ -26,4 +26,4 @@ def main(place):
  #mc.setBlocks(x-5,y-1,z-20,x+5,y-1,z-8,80)
 
 if __name__=='__main__':
- main("10.183.13.13")
+ main("127.0.0.1")
